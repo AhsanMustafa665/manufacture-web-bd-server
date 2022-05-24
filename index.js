@@ -39,6 +39,31 @@ async function run() {
       res.send(orders);
       console.log("Found all reviews", reviews);
     });
+
+    app.get("/orders", async (req, res) => {
+      console.log(req.query);
+      const get = ordersCollection.find({});
+      console.log("Request to find orders");
+      orders = await get.toArray();
+      res.send(orders);
+      console.log("Found all orders", orders);
+    });
+
+    app.post("/reviews", async (req, res) => {
+      const newReviews = req.body;
+      console.log("Request from UI ", newReviews);
+      const result = await reviewsCollection.insertOne(newReviews);
+      console.log("Successfully Added New reviews ", result);
+      res.json(result);
+    });
+
+    app.post("/orders", async (req, res) => {
+      const newReviews = req.body;
+      console.log("Request from UI ", newReviews);
+      const result = await ordersCollection.insertOne(newReviews);
+      console.log("Successfully Added New orders ", result);
+      res.json(result);
+    });
   } finally {
   }
 }
