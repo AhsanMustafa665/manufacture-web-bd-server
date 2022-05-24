@@ -21,12 +21,23 @@ async function run() {
   try {
     await client.connect();
     const toolCollection = client.db("tools-portal").collection("services");
+    const reviewsCollection = client.db("tools-portal").collection("reviews");
+    const ordersCollection = client.db("tools-portal").collection("orders");
 
     app.get("/service", async (req, res) => {
       const query = {};
       const cursor = toolCollection.find(query);
       const services = await cursor.toArray();
       res.send(services);
+    });
+
+    app.get("/reviews", async (req, res) => {
+      console.log(req.query);
+      const get = reviewsCollection.find({});
+      console.log("Request to find reviews");
+      reviews = await get.toArray();
+      res.send(orders);
+      console.log("Found all reviews", reviews);
     });
   } finally {
   }
