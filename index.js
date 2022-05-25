@@ -36,7 +36,7 @@ async function run() {
       const get = reviewsCollection.find({});
       console.log("Request to find reviews");
       reviews = await get.toArray();
-      res.send(orders);
+      res.send(reviews);
       console.log("Found all reviews", reviews);
     });
 
